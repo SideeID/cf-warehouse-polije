@@ -29,6 +29,15 @@
 }
 
 .required::after {
-    content: '*';
-    @apply text-red-600 px-1
+    content: "*";
+    @apply text-red-600 px-1;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }

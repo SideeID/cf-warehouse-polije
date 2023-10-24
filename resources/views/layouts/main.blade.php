@@ -15,9 +15,17 @@
 </head>
 
 <body>
+    <div class="flex min-h-screen w-full flex-col container mx-auto">
+        @include('components.header')
 
+        <div class="flex flex-1 w-full">
+            {{-- isi disini --}}
+        </div>
 
-@yield('otherjs')
+    </div>
+
+    <script src="/js/profile.js"></script>
+    @yield('otherjs')
 </body>
 
 </html>
