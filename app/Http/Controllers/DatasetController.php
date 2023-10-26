@@ -26,4 +26,16 @@ class DatasetController extends Controller
 
         return redirect('/');
     }
+
+    public function kelolah_dataset(Request $request)
+    {
+        // Ubah id_user 1 ke session sesuai yang login
+        $data = Dataset::where('id_user', 1)->get();
+        if($request->has('search')){
+            $data = Dataset::where('id_user', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->get();
+        }
+
+
+        return view('pages.user.dataset', compact('data'));
+    }
 }

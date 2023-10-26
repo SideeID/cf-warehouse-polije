@@ -20,9 +20,7 @@ Route::get('/', function () {
 
 Route::get('/data/{user}/{id}', [DatasetController::class, 'detail_dataset']);
 
-Route::get('/user/dataset', function () {
-    return view('pages.user.dataset');
-});
+Route::get('/user/dataset', [DatasetController::class, 'kelolah_dataset']);
 
 Route::get('/admin/menunggu-konfirmasi', function () {
     return view('pages.user.admin.MenungguKonfirmasi');
