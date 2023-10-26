@@ -34,6 +34,9 @@
                     <p class="">{{ $data->download_count }} Kali diunduh</p>
                 </div>
                 <h1 class="font-poppins-semibold text-3xl mb-2 mt-6">Paper</h1>
+                @if (count($data->paper) == 0)
+                    <p>Tidak ada paper</p>
+                @endif
                 @foreach ($data->paper as $item)
                     <div class="flex flex-row gap-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19"
