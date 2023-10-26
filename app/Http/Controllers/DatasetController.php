@@ -30,12 +30,64 @@ class DatasetController extends Controller
     public function kelolah_dataset(Request $request)
     {
         // Ubah id_user 1 ke session sesuai yang login
-        $data = Dataset::where('id_user', 1)->get();
-        if($request->has('search')){
-            $data = Dataset::where('id_user', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->get();
+        $data = Dataset::where('id_user', 1)->orderBy('created_at', 'desc')->get();
+        if ($request->has('search')) {
+            $data = Dataset::where('id_user', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->get();
         }
 
 
         return view('pages.user.dataset', compact('data'));
+    }
+
+    public function menunggu_konfirmasi(Request $request)
+    {
+        $data = Dataset::where('id_user', 1)->where('valid', 0)->orderBy('created_at', 'desc')->paginate(10);
+        if ($request->has('search')) {
+            $data = Dataset::where('id_user', 1)->where('valid', 0)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+        }
+
+        if ($request->has('search')) {
+            $data->appends(array(
+                'search' => $request->search
+            ));
+        }
+
+        return view('pages.user.admin.MenungguKonfirmasi', compact('data'));
+    }
+
+    public function tolak_dataset($kode, Request $request)
+    {
+        if ($request->has('token')) {
+            if ($request->token === $request->session()->token()) {
+                $request->session()->regenerateToken();
+
+                Dataset::find($kode)->delete();
+
+                return redirect('/admin/menunggu-konfirmasi');
+            } else {
+                return redirect('/admin/menunggu-konfirmasi');
+            }
+        } else {
+            return redirect('/admin/menunggu-konfirmasi');
+        }
+    }
+
+    public function terima_dataset($kode, Request $request)
+    {
+        if ($request->has('token')) {
+            if ($request->token === $request->session()->token()) {
+                $request->session()->regenerateToken();
+
+                Dataset::where('id_data', $kode)->update([
+                    "valid" => 1
+                ]);
+
+                return redirect('/admin/menunggu-konfirmasi');
+            } else {
+                return redirect('/admin/menunggu-konfirmasi');
+            }
+        } else {
+            return redirect('/admin/menunggu-konfirmasi');
+        }
     }
 }
