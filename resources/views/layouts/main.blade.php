@@ -16,6 +16,7 @@
 
 <body>
     <div class="flex min-h-screen w-full flex-col container mx-auto">
+        @yield('modal')
         @include('components.header')
 
         <div class="flex flex-1 w-full">
