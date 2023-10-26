@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('layouts.main');
 });
 
-Route::get('/dataset', function () {
+Route::get('/detail/dataset', function () {
     return view('pages.DetailDataset');
 });
+
+Route::get('/user/dataset', function () {
+    return view('pages.hasLogin.dataset');
+});
+

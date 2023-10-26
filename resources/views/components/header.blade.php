@@ -1,4 +1,4 @@
-<div class="py-6 px-4 flex h-fit w-full flex-row justify-between border-b-[2px] sticky top-0 bg-white">
+<div class="py-6 px-4 flex h-fit w-full flex-row justify-between border-b-[2px] sticky top-0 bg-white z-50">
     <img class="h-fit w-fit" src="/assets/images/logo.png" alt="logo">
     <img onclick="handleProfile()" class="h-12 rounded-full" src="https://picsum.photos/200" alt="profile">
 </div>
