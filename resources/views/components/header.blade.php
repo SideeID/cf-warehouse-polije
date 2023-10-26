@@ -1,13 +1,13 @@
-<div class="py-6 px-4 flex h-fit w-full flex-row justify-between border-b-[2px]">
+<div class="py-6 px-4 flex h-fit w-full flex-row justify-between border-b-[2px] sticky top-0 bg-white z-50">
     <img class="h-fit w-fit" src="/assets/images/logo.png" alt="logo">
     <img onclick="handleProfile()" class="h-12 rounded-full" src="https://picsum.photos/200" alt="profile">
 </div>
 {{-- bg hitam --}}
-<div onclick="handleProfile()" id="bgProfile" class="min-h-screen bg-black fixed flex w-full opacity-0 left-0 top-0 pointer-events-none duration-300 ease-in-out">
+<div onclick="handleProfile()" id="bgProfile" class="min-h-screen bg-black fixed flex w-full opacity-0 left-0 top-0 pointer-events-none duration-300 ease-in-out z-[60]">
 </div>
 
 {{-- dialog --}}
-<di id="dialogProfile" class="flex flex-col w-full md:w-[400px] min-h-screen bg-white fixed right-0 translate-x-[800px] md:translate-x-[400px] drop-shadow-xl duration-300 ease-in-out">
+<di id="dialogProfile" class="flex flex-col w-full md:w-[400px] min-h-screen bg-white fixed right-0 translate-x-[800px] md:translate-x-[400px] drop-shadow-xl duration-300 ease-in-out z-[70]">
     <div class="flex flex-row justify-between items-center border-b-[2px] px-6 py-6">
         <div class="flex flex-row gap-4 items-center">
             <img class="h-12 rounded-full" src="https://picsum.photos/200" alt="profile">
