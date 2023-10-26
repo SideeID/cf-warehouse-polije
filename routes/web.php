@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DatasetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +18,7 @@ Route::get('/', function () {
     return view('layouts.main');
 });
 
-Route::get('/detail/dataset', function () {
-    return view('pages.DetailDataset');
-});
+Route::get('/data/{user}/{id}', [DatasetController::class, 'detail_dataset']);
 
 Route::get('/user/dataset', function () {
     return view('pages.user.dataset');
