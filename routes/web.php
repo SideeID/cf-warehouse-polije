@@ -22,6 +22,14 @@ Route::get('/detail/dataset', function () {
 });
 
 Route::get('/user/dataset', function () {
-    return view('pages.hasLogin.dataset');
+    return view('pages.user.dataset');
+});
+
+Route::get('/admin/menunggu-konfirmasi', function () {
+    return view('pages.user.admin.MenungguKonfirmasi');
+});
+
+Route::get('/admin/telah-konfirmasi', function () {
+    return view('pages.user.admin.MenungguKonfirmasi');
 });
 
