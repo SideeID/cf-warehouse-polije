@@ -30,6 +30,6 @@ Route::get('/admin/menunggu-konfirmasi', function () {
 });
 
 Route::get('/admin/telah-konfirmasi', function () {
-    return view('pages.user.admin.MenungguKonfirmasi');
+    return view('pages.user.admin.TelahDikonfirmasi');
 });
 

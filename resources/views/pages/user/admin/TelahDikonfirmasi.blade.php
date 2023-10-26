@@ -6,9 +6,9 @@
 
         <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center">
             <div class="flex flex-col md:flex-row gap-3 cursor-default items-start md:items-center relative pb-4">
-                <h1 class="font-poppins-semibold text-md whitespace-pre pl-6 md:pl-0">Menunggu Konfirmasi</h1>
-                <h1 class="font-poppins-medium text-gray-500 text-md whitespace-pre pl-6 md:pl-4 hover:bg-slate-100 pr-4 py-3 rounded-md">Telah Dikonfirmasi</h1>
-                <div class="absolute w-2 h-[30px] bg-slate-700 md:h-2 md:w-[185px] md:bottom-0">
+                <h1 class="font-poppins-medium text-gray-500 text-md whitespace-pre pl-6 md:pl-4 hover:bg-slate-100 pr-4 py-3 rounded-md">Menunggu Konfirmasi</h1>
+                <h1 class="font-poppins-semibold text-md whitespace-pre pl-6 md:pl-0">Telah Dikonfirmasi</h1>
+                <div class="absolute w-2 h-[50px] bottom-0 bg-slate-700 md:h-2 md:w-[155px] md:bottom-0 md:right-0">
 
                 </div>
             </div>
@@ -34,10 +34,7 @@
                         reprehenderit est neque voluptas obcaecati. Accusantium, pariatur.</p>
                     <div class="flex flex-row justify-between mt-12">
                         <div class="bg-slate-500 hover:bg-slate-600 text-white px-2 py-2 rounded-md">Lihat Detail</div>
-                        <div class="flex flex-row gap-3 items-center">
-                            <div class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md">✘</div>
-                            <div class="bg-green-400 hover:bg-green-500 px-3 py-2 rounded-md">✓</div>
-                        </div>
+                       
                     </div>
                 </div>
             @endfor
