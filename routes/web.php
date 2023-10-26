@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layouts.main');
 });
+
+Route::get('/dataset', function () {
+    return view('pages.DetailDataset');
+});

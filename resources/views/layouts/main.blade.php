@@ -20,6 +20,7 @@
 
         <div class="flex flex-1 w-full">
             {{-- isi disini --}}
+            @yield('konten')
         </div>
 
     </div>
