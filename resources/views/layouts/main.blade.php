@@ -19,7 +19,7 @@
         @include('components.header')
 
         <div class="flex flex-1 w-full">
-            {{-- isi disini --}}
+            
         </div>
 
     </div>
