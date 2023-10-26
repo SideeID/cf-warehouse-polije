@@ -6,7 +6,7 @@
             <img class="h-6 w-6 rounded-full" src="https://picsum.photos/200" alt="foto">
             <p class="text-xs text-gray-500">e41210618@student.polije.ac.id - Diperbarui 13 hari yang lalu</p>
         </div>
-        <div class="flex flex-row h-full w-full mt-8">
+        <div class="flex flex-col md:flex-row h-full w-full mt-8">
             <div class="flex flex-col flex-1 h-full pr-8">
                 <h1 class="font-poppins-semibold text-3xl text-gray-700 border-b-2 pb-6">Hand Recognition Dataset</h1>
                 <h1 class="font-poppins-semibold text-3xl text-gray-700 py-6">Deskripsi</h1>
@@ -45,7 +45,7 @@
                     molestias quis error aliquid!
                 </div>
             </div>
-            <div class="flex flex-col w-[30%] h-full gap-2 px-4 py-4">
+            <div class="flex flex-col w-full mt-6 md:mt-0 border-t-2 md:border-t-0 md:w-[30%] h-full gap-2 px-0 md:px-4 py-4">
                 <button
                     class="bg-slate-700 hover:bg-slate-900 text-white py-4 rounded-md flex flex-row gap-3 items-center justify-center"><svg
                         width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="flex flex-col gap-2 h-full w-full mt-12">
-            <div class="flex flex-row gap-2 py-4 pt-8 justify-between border-t-2">
+            <div class="flex flex-row gap-2 py-4 pt-8 justify-between items-center border-t-2">
                 <div class="flex flex-row gap-2 items-center">
 
                     <svg width="33" height="33" viewBox="0 0 33 33" fill="none"
@@ -89,11 +89,11 @@
                     </svg>
                     <p class="font-poppins-semibold text-2xl text-gray-600">Popular Dataset</p>
                 </div>
-                <p class="hover:text-blue-700 cursor-pointer">Lihat Semua</p>
+                <p class="hover:text-blue-700 text-xs md:text-base cursor-pointer">Lihat Semua</p>
             </div>
-            <div class="grid grid-cols-2 gap-12 mt-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-4">
                 @for ($i = 0; $i < 4; $i++)
-                    <div class="w-full flex border-2 rounded-lg h-fit flex-col py-4">
+                    <div class="w-full flex border-2 rounded-lg h-fit flex-col py-4 overflow-hidden">
                         <div class="px-8">
                             <h1 class="font-poppins-semibold text-xl">Hand Recognition Dataset</h1>
                             <p class="text-xs text-gray-600">Diperbarui 6 hari yang lalu</p>
@@ -120,7 +120,7 @@
             </div>
         </div>
         <div class="flex flex-col gap-2 h-full w-full mt-12">
-            <div class="flex flex-row gap-2 py-4 pt-8 justify-between border-t-2">
+            <div class="flex flex-row gap-2 py-4 pt-8 justify-between items-center border-t-2">
                 <div class="flex flex-row gap-2 items-center">
 
                     <svg width="33" height="33" viewBox="0 0 33 33" fill="none"
@@ -131,11 +131,11 @@
                     </svg>
                     <p class="font-poppins-semibold text-2xl text-gray-600">Newer Dataset</p>
                 </div>
-                <p class="hover:text-blue-700 cursor-pointer">Lihat Semua</p>
+                <p class="hover:text-blue-700 text-xs md:text-base cursor-pointer">Lihat Semua</p>
             </div>
-            <div class="grid grid-cols-2 gap-12 mt-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-4">
                 @for ($i = 0; $i < 4; $i++)
-                    <div class="w-full flex border-2 rounded-lg h-fit flex-col py-4">
+                    <div class="w-full flex border-2 rounded-lg h-fit flex-col py-4 overflow-hidden">
                         <div class="px-8">
                             <h1 class="font-poppins-semibold text-xl">Hand Recognition Dataset</h1>
                             <p class="text-xs text-gray-600">Diperbarui 6 hari yang lalu</p>
