@@ -31,9 +31,15 @@ class DatasetController extends Controller
     public function kelolah_dataset(Request $request)
     {
         // Ubah id_user 1 ke session sesuai yang login
-        $data = Dataset::where('id_user', 1)->orderBy('created_at', 'desc')->get();
+        $data = Dataset::where('id_user', 1)->orderBy('created_at', 'desc')->paginate(10);
         if ($request->has('search')) {
-            $data = Dataset::where('id_user', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->get();
+            $data = Dataset::where('id_user', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+        }
+
+        if ($request->has('search')) {
+            $data->appends(array(
+                'search' => $request->search
+            ));
         }
 
 
