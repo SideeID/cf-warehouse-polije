@@ -55,7 +55,7 @@ class DatasetController extends Controller
 
         return view('pages.user.admin.MenungguKonfirmasi', compact('data'));
     }
-
+    
     public function tolak_dataset($kode, Request $request)
     {
         if ($request->has('token')) {
@@ -80,11 +80,11 @@ class DatasetController extends Controller
         if ($request->has('token')) {
             if ($request->token === $request->session()->token()) {
                 $request->session()->regenerateToken();
-
+                
                 Dataset::where('id_data', $kode)->update([
                     "valid" => 1
                 ]);
-
+                
                 Alert::success('Berhasil', 'Berhasil mengkonfirmasi data');
 
                 return redirect('/admin/menunggu-konfirmasi');
@@ -94,5 +94,21 @@ class DatasetController extends Controller
         } else {
             return redirect('/admin/menunggu-konfirmasi');
         }
+    }
+
+    public function telah_konfirmasi(Request $request)
+    {
+        $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 1)->orderBy('created_at', 'desc')->paginate(10);
+        if ($request->has('search')) {
+            $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+        }
+    
+        if ($request->has('search')) {
+            $data->appends(array(
+                'search' => $request->search
+            ));
+        }
+    
+        return view('pages.user.admin.TelahDikonfirmasi', compact('data'));
     }
 }

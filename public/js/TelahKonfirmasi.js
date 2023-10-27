@@ -66,39 +66,6 @@ const handleModal = () => {
     }
 };
 
-const tolakDataset = (url) => {
-    Swal.fire({
-        title: "Konfirmasi",
-        text: "Apakah anda yakin ingin menolak dataset?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonText: "Tidak",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ya",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            location.href = window.location.origin + url;
-        }
-    });
-};
-const terimaDataset = (url) => {
-    Swal.fire({
-        title: "Konfirmasi",
-        text: "Apakah anda yakin ingin mengkonfirmasi dataset?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonText: "Tidak",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ya",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            location.href = window.location.origin + url;
-        }
-    });
-};
-
 const detailDataset = (data) => {
     d_title.innerHTML = data.nama_data;
     d_deskripsi.innerHTML = data.deskripsi_data;

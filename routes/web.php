@@ -43,9 +43,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/delete/{kode}', [DatasetController::class, 'tolak_dataset']);
         Route::get('/accept/{kode}', [DatasetController::class, 'terima_dataset']);
     });
-    
-    Route::get('/telah-konfirmasi', function () {
-        return view('pages.user.admin.TelahDikonfirmasi');
+
+    Route::prefix('telah-konfirmasi')->group(function () {
+        Route::get('/', [DatasetController::class, 'telah_konfirmasi']);
     });
+    
 });
 
