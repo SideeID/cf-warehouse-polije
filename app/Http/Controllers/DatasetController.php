@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dataset;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DatasetController extends Controller
 {
@@ -30,9 +31,15 @@ class DatasetController extends Controller
     public function kelolah_dataset(Request $request)
     {
         // Ubah id_user 1 ke session sesuai yang login
-        $data = Dataset::where('id_user', 1)->orderBy('created_at', 'desc')->get();
+        $data = Dataset::where('id_user', 1)->orderBy('created_at', 'desc')->paginate(10);
         if ($request->has('search')) {
-            $data = Dataset::where('id_user', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->get();
+            $data = Dataset::where('id_user', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+        }
+
+        if ($request->has('search')) {
+            $data->appends(array(
+                'search' => $request->search
+            ));
         }
 
 
@@ -41,9 +48,9 @@ class DatasetController extends Controller
 
     public function menunggu_konfirmasi(Request $request)
     {
-        $data = Dataset::where('id_user', 1)->where('valid', 0)->orderBy('created_at', 'desc')->paginate(10);
+        $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 0)->orderBy('created_at', 'desc')->paginate(10);
         if ($request->has('search')) {
-            $data = Dataset::where('id_user', 1)->where('valid', 0)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+            $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 0)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
         }
 
         if ($request->has('search')) {
@@ -54,7 +61,7 @@ class DatasetController extends Controller
 
         return view('pages.user.admin.MenungguKonfirmasi', compact('data'));
     }
-
+    
     public function tolak_dataset($kode, Request $request)
     {
         if ($request->has('token')) {
@@ -62,6 +69,8 @@ class DatasetController extends Controller
                 $request->session()->regenerateToken();
 
                 Dataset::find($kode)->delete();
+
+                Alert::success('Berhasil', 'Berhasil menolak data');
 
                 return redirect('/admin/menunggu-konfirmasi');
             } else {
@@ -77,10 +86,12 @@ class DatasetController extends Controller
         if ($request->has('token')) {
             if ($request->token === $request->session()->token()) {
                 $request->session()->regenerateToken();
-
+                
                 Dataset::where('id_data', $kode)->update([
                     "valid" => 1
                 ]);
+                
+                Alert::success('Berhasil', 'Berhasil mengkonfirmasi data');
 
                 return redirect('/admin/menunggu-konfirmasi');
             } else {
@@ -89,5 +100,21 @@ class DatasetController extends Controller
         } else {
             return redirect('/admin/menunggu-konfirmasi');
         }
+    }
+
+    public function telah_konfirmasi(Request $request)
+    {
+        $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 1)->orderBy('created_at', 'desc')->paginate(10);
+        if ($request->has('search')) {
+            $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+        }
+    
+        if ($request->has('search')) {
+            $data->appends(array(
+                'search' => $request->search
+            ));
+        }
+    
+        return view('pages.user.admin.TelahDikonfirmasi', compact('data'));
     }
 }

@@ -23,9 +23,9 @@
             </div>
         </div>
         @if (count($data) != 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 w-full h-fit gap-10 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 w-full h-fit gap-10 mt-6 flex-1">
                 @foreach ($data as $item)
-                    <div class="flex flex-col  py-4 px-6 bg-gray-100 rounded-xl relative overflow-hidden">
+                    <div class="flex flex-col  py-4 px-6 bg-gray-100 rounded-xl relative overflow-hidden h-fit">
                         <svg class="absolute top-4 right-8" xmlns="http://www.w3.org/2000/svg" width="3" height="24"
                             viewBox="0 0 3 24" fill="none">
                             <g clip-path="url(#clip0_44_16)">
@@ -56,6 +56,9 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
+            <div class="mt-4 flex flex-col justify-center md:flex-row md:justify-between gap-2 py-2 items-center">
+                {{ $data->onEachSide(2)->links('components.pagination') }}
             </div>
         @else
             <div class="flex w-full h-full items-center flex-col justify-center">

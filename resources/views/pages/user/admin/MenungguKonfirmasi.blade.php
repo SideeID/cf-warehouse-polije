@@ -11,7 +11,7 @@
         class="flex flex-col w-full md:w-[60%] md:max-w-[800px] min-h-screen h-full fixed right-0 translate-x-[800px] md:translate-x-[1000px] drop-shadow-xl duration-300 ease-in-out z-[70] bg-white">
         <div class="flex flex-row justify-between items-center border-b-[2px] px-6 py-6">
             <div class="flex flex-row gap-4 items-center">
-                <p class="font-poppins-semibold text-2xl">Hand Recognition Dataset</p>
+                <p id="d_title" class="font-poppins-semibold text-2xl">Hand Recognition Dataset</p>
             </div>
             <div onclick="handleModal()" class="p-2 hover:bg-slate-200 rounded-md duration-200">
                 <svg class="" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
@@ -24,7 +24,7 @@
         </div>
         <div class="flex w-full h-full flex-col py-6 px-4 overflow-y-auto ">
             <h1 class="font-poppins-semibold text-2xl py-1">Deskripsi</h1>
-            <div class="whitespace-pre-line h-fit">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, in
+            <div id="d_deskripsi" class="whitespace-pre-line h-fit">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, in
                 ex! Nam nobis doloribus nisi.
                 Cumque dolorum exercitationem eveniet pariatur sint iusto officia eligendi, quas accusamus necessitatibus
                 quasi ipsam blanditiis quis mollitia dolores doloribus illo minus nemo? Beatae, repellendus odit.
@@ -40,25 +40,27 @@
             </div>
 
             <h1 class="font-poppins-semibold text-2xl py-1 mt-4">Files</h1>
-            <p
+            <a href="#" id="d_file"
                 class="border-b-2 border-b-blue-700 w-fit pb-3 text-blue-700 hover:border-b-blue-800 hover:text-blue-800 cursor-pointer">
-                gesture-recognition.zip</p>
+                gesture-recognition.zip</a>
             <h1 class="font-poppins-semibold text-2xl py-1 mt-4">Paper</h1>
-            <div class="flex flex-row gap-3 py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
-                    <path
-                        d="M10.2915 7.12498V2.77081L14.6457 7.12498M4.74984 1.58331C3.87109 1.58331 3.1665 2.2879 3.1665 3.16665V15.8333C3.1665 16.2532 3.33332 16.656 3.63025 16.9529C3.92718 17.2498 4.32991 17.4166 4.74984 17.4166H14.2498C14.6698 17.4166 15.0725 17.2498 15.3694 16.9529C15.6664 16.656 15.8332 16.2532 15.8332 15.8333V6.33331L11.0832 1.58331H4.74984Z"
-                        fill="black" />
-                </svg>
-                <p>Gesture Recognition based Kiosk</p>
-            </div>
-            <div class="flex flex-row gap-3 py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
-                    <path
-                        d="M10.2915 7.12498V2.77081L14.6457 7.12498M4.74984 1.58331C3.87109 1.58331 3.1665 2.2879 3.1665 3.16665V15.8333C3.1665 16.2532 3.33332 16.656 3.63025 16.9529C3.92718 17.2498 4.32991 17.4166 4.74984 17.4166H14.2498C14.6698 17.4166 15.0725 17.2498 15.3694 16.9529C15.6664 16.656 15.8332 16.2532 15.8332 15.8333V6.33331L11.0832 1.58331H4.74984Z"
-                        fill="black" />
-                </svg>
-                <p>Gesture Recognition based Kiosk</p>
+            <div id="d_paper">
+                <div class="flex flex-row gap-3 py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                        <path
+                            d="M10.2915 7.12498V2.77081L14.6457 7.12498M4.74984 1.58331C3.87109 1.58331 3.1665 2.2879 3.1665 3.16665V15.8333C3.1665 16.2532 3.33332 16.656 3.63025 16.9529C3.92718 17.2498 4.32991 17.4166 4.74984 17.4166H14.2498C14.6698 17.4166 15.0725 17.2498 15.3694 16.9529C15.6664 16.656 15.8332 16.2532 15.8332 15.8333V6.33331L11.0832 1.58331H4.74984Z"
+                            fill="black" />
+                    </svg>
+                    <p>Gesture Recognition based Kiosk</p>
+                </div>
+                <div class="flex flex-row gap-3 py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                        <path
+                            d="M10.2915 7.12498V2.77081L14.6457 7.12498M4.74984 1.58331C3.87109 1.58331 3.1665 2.2879 3.1665 3.16665V15.8333C3.1665 16.2532 3.33332 16.656 3.63025 16.9529C3.92718 17.2498 4.32991 17.4166 4.74984 17.4166H14.2498C14.6698 17.4166 15.0725 17.2498 15.3694 16.9529C15.6664 16.656 15.8332 16.2532 15.8332 15.8333V6.33331L11.0832 1.58331H4.74984Z"
+                            fill="black" />
+                    </svg>
+                    <p>Gesture Recognition based Kiosk</p>
+                </div>
             </div>
         </div>
 
@@ -72,8 +74,8 @@
         <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center">
             <div class="flex flex-col md:flex-row gap-3 cursor-default items-start md:items-center relative pb-4">
                 <h1 class="font-poppins-semibold text-md pl-6 md:pl-0">Menunggu Konfirmasi</h1>
-                <div class="font-poppins-medium text-gray-500 text-md pl-6 md:pl-4 hover:bg-slate-100 pr-4 py-3 rounded-md">
-                    Telah Dikonfirmasi.</div>
+                <a href="/admin/telah-konfirmasi" class="font-poppins-medium text-gray-500 text-md pl-6 md:pl-4 hover:bg-slate-100 pr-4 py-3 rounded-md">
+                    Telah Dikonfirmasi.</a>
                 <div class="absolute w-2 h-[30px] bg-slate-700 md:h-2 md:w-[185px] md:bottom-0">
 
                 </div>
@@ -98,12 +100,12 @@
                         <h1 class="font-poppins-semibold text-lg py-2">{{ $item->nama_data }}</h1>
                         <p class="line-clamp-2 text-sm text-gray-500">{{ $item->deskripsi_data }}</p>
                         <div class="flex flex-row justify-between mt-12">
-                            <div onclick="handleModal()"
+                            <div onclick="detailDataset({{$item}})"
                                 class="bg-slate-500 hover:bg-slate-600 text-white px-2 py-2 rounded-md">Lihat Detail</div>
                             <div class="flex flex-row gap-3 items-center">
-                                <a href="/admin/menunggu-konfirmasi/delete/{{ $item->id_data }}?token={{ csrf_token() }}"
+                                <button onclick="tolakDataset('/admin/menunggu-konfirmasi/delete/{{ $item->id_data }}?token={{ csrf_token() }}')"
                                     class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md">✘</a>
-                                <a href="/admin/menunggu-konfirmasi/accept/{{ $item->id_data }}?token={{ csrf_token() }}"
+                                <button onclick="terimaDataset('/admin/menunggu-konfirmasi/accept/{{ $item->id_data }}?token={{ csrf_token() }}')"
                                     class="bg-green-400 hover:bg-green-500 px-3 py-2 rounded-md">✓</a>
                             </div>
                         </div>
