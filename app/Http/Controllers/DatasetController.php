@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dataset;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DatasetController extends Controller
 {
@@ -41,9 +42,9 @@ class DatasetController extends Controller
 
     public function menunggu_konfirmasi(Request $request)
     {
-        $data = Dataset::where('id_user', 1)->where('valid', 0)->orderBy('created_at', 'desc')->paginate(10);
+        $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 0)->orderBy('created_at', 'desc')->paginate(10);
         if ($request->has('search')) {
-            $data = Dataset::where('id_user', 1)->where('valid', 0)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+            $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 0)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
         }
 
         if ($request->has('search')) {
@@ -63,6 +64,8 @@ class DatasetController extends Controller
 
                 Dataset::find($kode)->delete();
 
+                Alert::success('Berhasil', 'Berhasil menolak data');
+
                 return redirect('/admin/menunggu-konfirmasi');
             } else {
                 return redirect('/admin/menunggu-konfirmasi');
@@ -81,6 +84,8 @@ class DatasetController extends Controller
                 Dataset::where('id_data', $kode)->update([
                     "valid" => 1
                 ]);
+
+                Alert::success('Berhasil', 'Berhasil mengkonfirmasi data');
 
                 return redirect('/admin/menunggu-konfirmasi');
             } else {

@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
     <div class="flex min-h-screen w-full flex-col container mx-auto">
         @yield('modal')
         @include('components.header')
@@ -26,6 +27,7 @@
 
     </div>
 
+    <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
     <script src="/js/profile.js"></script>
     @yield('otherjs')
 </body>

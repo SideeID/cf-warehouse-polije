@@ -6,7 +6,7 @@
 
         <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center">
             <div class="flex flex-col md:flex-row gap-3 cursor-default items-start md:items-center relative pb-4">
-                <h1 class="font-poppins-medium text-gray-500 text-md whitespace-pre pl-6 md:pl-4 hover:bg-slate-100 pr-4 py-3 rounded-md">Menunggu Konfirmasi</h1>
+                <a href="/admin/menunggu-konfirmasi" class="font-poppins-medium text-gray-500 text-md whitespace-pre pl-6 md:pl-4 hover:bg-slate-100 pr-4 py-3 rounded-md">Menunggu Konfirmasi</a>
                 <h1 class="font-poppins-semibold text-md whitespace-pre pl-6 md:pl-0">Telah Dikonfirmasi</h1>
                 <div class="absolute w-2 h-[50px] bottom-0 bg-slate-700 md:h-2 md:w-[155px] md:bottom-0 md:right-0">
 
