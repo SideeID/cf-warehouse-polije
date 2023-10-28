@@ -37,6 +37,8 @@ Route::get('/data/{user}/{id}', [DatasetController::class, 'detail_dataset']);
 
 Route::get('/user/dataset', [DatasetController::class, 'kelolah_dataset']);
 
+Route::post('/user/dataset/add', [DatasetController::class, 'add_dataset']);
+
 Route::prefix('admin')->group(function () {
     Route::prefix('menunggu-konfirmasi')->group(function () {
         Route::get('/', [DatasetController::class, 'menunggu_konfirmasi']);
@@ -49,4 +51,6 @@ Route::prefix('admin')->group(function () {
     });
     
 });
+
+Route::get('/download/{name}/{id}', [DatasetController::class, 'download']);
 

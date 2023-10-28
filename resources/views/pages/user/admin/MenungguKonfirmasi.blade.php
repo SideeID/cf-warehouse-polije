@@ -94,11 +94,11 @@
             </div>
         </div>
         @if (count($data) != 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 w-full h-fit gap-10 mt-10 flex-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 w-full h-fit gap-4 mt-10">
                 @foreach ($data as $item)
-                    <div class="flex flex-col  py-4 px-6 bg-gray-100 rounded-xl relative overflow-hidden h-fit">
+                    <div class="flex flex-col py-4 px-6 bg-gray-100 rounded-xl relative overflow-hidden h-fit">
                         <h1 class="font-poppins-semibold text-lg py-2">{{ $item->nama_data }}</h1>
-                        <p class="line-clamp-2 text-sm text-gray-500">{{ $item->deskripsi_data }}</p>
+                        <p class="line-clamp-2 text-sm text-gray-500 h-[40px]">{{ $item->deskripsi_data }}</p>
                         <div class="flex flex-row justify-between mt-12">
                             <div onclick="detailDataset({{$item}})"
                                 class="bg-slate-500 hover:bg-slate-600 text-white px-2 py-2 rounded-md">Lihat Detail</div>
@@ -112,7 +112,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="mt-4 flex flex-col justify-center md:flex-row md:justify-between gap-2 py-2 items-center">
+            <div class="mt-4 flex flex-col justify-center md:flex-row md:justify-between gap-2 py-2 items-end flex-1">
 
                 {{ $data->onEachSide(2)->links('components.pagination') }}
             </div>

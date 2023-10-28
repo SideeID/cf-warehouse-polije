@@ -70,7 +70,7 @@ const detailDataset = (data) => {
     d_title.innerHTML = data.nama_data;
     d_deskripsi.innerHTML = data.deskripsi_data;
     d_file.innerHTML = data.file_data;
-    d_file.href = `/uploads/data/${data.file_data}`;
+    d_file.href = `/download/${data.file_data}/${data.id_data}`;
 
     var kontenHtml = "";
     data.paper.forEach((element) => {

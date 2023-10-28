@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dataset;
+use App\Models\JenisPaper;
+use App\Models\Paper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DatasetController extends Controller
@@ -42,8 +46,10 @@ class DatasetController extends Controller
             ));
         }
 
+        $jenis_paper = JenisPaper::all();
 
-        return view('pages.user.dataset', compact('data'));
+
+        return view('pages.user.dataset', compact('data', 'jenis_paper'));
     }
 
     public function menunggu_konfirmasi(Request $request)
@@ -61,14 +67,20 @@ class DatasetController extends Controller
 
         return view('pages.user.admin.MenungguKonfirmasi', compact('data'));
     }
-    
+
     public function tolak_dataset($kode, Request $request)
     {
         if ($request->has('token')) {
             if ($request->token === $request->session()->token()) {
                 $request->session()->regenerateToken();
 
-                Dataset::find($kode)->delete();
+                $data = Dataset::find($kode);
+
+                if (File::exists("uploads/data/" . $data->file_data)) {
+                    File::delete("uploads/data/" . $data->file_data);
+                }
+
+                $data->delete();
 
                 Alert::success('Berhasil', 'Berhasil menolak data');
 
@@ -86,11 +98,11 @@ class DatasetController extends Controller
         if ($request->has('token')) {
             if ($request->token === $request->session()->token()) {
                 $request->session()->regenerateToken();
-                
+
                 Dataset::where('id_data', $kode)->update([
                     "valid" => 1
                 ]);
-                
+
                 Alert::success('Berhasil', 'Berhasil mengkonfirmasi data');
 
                 return redirect('/admin/menunggu-konfirmasi');
@@ -108,13 +120,73 @@ class DatasetController extends Controller
         if ($request->has('search')) {
             $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
         }
-    
+
         if ($request->has('search')) {
             $data->appends(array(
                 'search' => $request->search
             ));
         }
-    
+
         return view('pages.user.admin.TelahDikonfirmasi', compact('data'));
+    }
+
+    public function add_dataset(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'judul' =>  'required',
+            'deskripsi' => 'required',
+            'file' => 'required'
+        ], [
+            'required' => 'Field wajib diisi!'
+        ]);
+
+        if ($validator->fails()) {
+            Alert::error('Gagal', 'Gagal menambahkan data');
+            return redirect()->back()->withErrors($validator);
+        }
+
+
+        $dataset = new Dataset;
+        $dataset->nama_data = $request->judul;
+        $dataset->deskripsi_data = $request->deskripsi;
+
+        $file = $request->file('file');
+        if ($file) {
+            $nama_file = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/data/'), $nama_file);
+            $dataset->file_data = $nama_file;
+        }
+
+        $dataset->download_count = 0;
+        $dataset->id_user = 1;
+        $dataset->valid = 0;
+        $dataset->save();
+
+        if($request->has('nama_paper') && $request->has('jenis_paper')){
+            for ($i=0; $i < count($request->nama_paper); $i++) { 
+                Paper::create([
+                    "nama_paper" => $request->nama_paper[$i],
+                    "id_jenis_paper" => $request->jenis_paper[$i],
+                    "id_data" => $dataset->id_data
+                ]);
+            }
+        }
+
+
+
+        Alert::success('Berhasil', 'Berhasil menambahkan data');
+        return redirect('/user/dataset');
+    }
+
+    public function download($name, $id){
+        if (File::exists("uploads/data/" . $name)) {
+            $data = Dataset::find($id);
+            $data->download_count = $data->download_count + 1;
+            $data->save();
+            
+            return response()->download(public_path('uploads/data/' . $name));
+        }
+
+        return redirect()->back();
     }
 }

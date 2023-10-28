@@ -14,7 +14,7 @@
     @vite(['resources/css/app.css'])
 </head>
 
-<body>
+<body onload="@yield('onstart')">
     @include('sweetalert::alert')
     <div class="flex min-h-screen w-full flex-col container mx-auto">
         @yield('modal')

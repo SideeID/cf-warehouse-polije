@@ -1,5 +1,91 @@
 @extends('layouts.main')
 
+@section('onstart')
+    loadJenisPaper({{ $jenis_paper }})
+@endsection
+
+@section('modal')
+    {{-- bg hitam --}}
+    <div onclick="handleModal()" id="bg"
+        class="min-h-screen bg-black fixed flex w-full opacity-0 left-0 top-0 pointer-events-none duration-300 ease-in-out z-[60]">
+    </div>
+
+    {{-- dialog --}}
+    <form id="form" action="/user/dataset/add" method="post" enctype="multipart/form-data">
+        @csrf
+        <div id="dialog"
+            class="flex flex-col w-full md:w-[60%] md:max-w-[800px] min-h-screen h-full fixed right-0 translate-x-[800px] md:translate-x-[1000px] drop-shadow-xl duration-300 ease-in-out z-[70] bg-white">
+            <div class="flex flex-row justify-between items-center border-b-[2px] px-6 py-6">
+                <div class="flex flex-row gap-4 items-center">
+                    <p id="d_title" class="font-poppins-semibold text-2xl">Tambah Data</p>
+                </div>
+                <div onclick="handleModal()" class="p-2 hover:bg-slate-200 rounded-md duration-200">
+                    <svg class="" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                        stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
+            </div>
+            <div id="container_form" class="flex w-full h-full flex-col py-6 px-6 overflow-y-auto">
+                <label for="i_judul" class="font-poppins-semibold text-lg py-2 required">Judul</label>
+                <input class="border-2 px-3 py-2 rounded-lg" type="text" name="judul" id="i_judul">
+
+                <label for="i_deskripsi" class="font-poppins-semibold text-lg py-2 required">Deskripsi</label>
+                <textarea class="border-2 px-3 py-2 rounded-lg min-h-[200px]" name="deskripsi" id="i_deskripsi"></textarea>
+
+                <label for="i_file" class="font-poppins-semibold text-lg py-2 required">Files</label>
+                <div
+                    class="w-full flex min-h-[150px] border-2 rounded-lg relative justify-center items-center flex-col gap-2">
+                    <div id="image_file">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="85" height="60" viewBox="0 0 85 60"
+                            fill="none">
+                            <path
+                                d="M42.5 0.625C31.5562 0.625 22.95 8.93906 21.7467 19.5508C19.4322 19.9237 17.2615 20.9155 15.4646 22.4212C13.6676 23.9269 12.3111 25.8904 11.5387 28.1039C5.00437 29.9872 0 35.815 0 43.125C0 51.9544 7.10813 59.0625 15.9375 59.0625H69.0625C77.8919 59.0625 85 51.9544 85 43.125C85 38.45 82.7289 34.2638 79.4378 31.3366C78.8216 22.0025 71.3761 14.5544 62.0075 14.0709C58.8094 6.29078 51.4728 0.625 42.5 0.625ZM42.5 5.9375C49.8366 5.9375 55.7016 10.6391 57.7734 17.3062L58.3578 19.2188H61.0938C68.4117 19.2188 74.375 25.182 74.375 32.5V33.8281L75.4534 34.6595C76.755 35.6571 77.8126 36.9376 78.5462 38.4043C79.2797 39.8709 79.67 41.4852 79.6875 43.125C79.6875 49.1706 75.1081 53.75 69.0625 53.75H15.9375C9.89188 53.75 5.3125 49.1706 5.3125 43.125C5.3125 37.7594 9.16406 33.5944 14.025 32.7497L15.7702 32.4177L16.1022 30.6698C16.8991 27.0919 20.0706 24.5312 23.9062 24.5312H26.5625V21.875C26.5625 12.9234 33.5484 5.9375 42.5 5.9375ZM42.5 20.7966L40.5875 22.6214L29.9625 33.2464L33.7875 37.0714L39.8438 31.0045V48.4375H45.1562V31.0045L51.2125 37.0661L55.0375 33.2411L44.4125 22.6161L42.5 20.7966Z"
+                                fill="#4C5966" />
+                        </svg>
+                    </div>
+                    <p id="name_file">Klik untuk upload</p>
+
+                    <input onchange="loadFile(this)" class="border-2 px-3 py-2 rounded-lg w-full h-full opacity-0 absolute"
+                        type="file" name="file" id="i_file">
+                </div>
+
+                <label for="paper" class="font-poppins-semibold text-lg py-2 mt-6 border-b-2">Paper</label>
+                <div id="konten_paper" class="gap-2 flex flex-col">
+                    {{-- <div
+                        class="flex flex-col md:flex-row md:justify-between gap-3 border-2 px-3 rounded-lg pt-2 pb-8 bg-gray-100 relative">
+                        <div class="bg-red-500 absolute right-4 py-1 rounded-md px-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18"
+                                fill="none">
+                                <path
+                                    d="M0.958333 15.3333C0.958333 16.3875 1.82083 17.25 2.875 17.25H10.5417C11.5958 17.25 12.4583 16.3875 12.4583 15.3333V3.83333H0.958333V15.3333ZM13.4167 0.958333H10.0625L9.10417 0H4.3125L3.35417 0.958333H0V2.875H13.4167V0.958333Z"
+                                    fill="white" />
+                            </svg>
+                        </div>
+                        <div class="flex flex-col w-full md:w-1/2">
+                            <label for="paper1" class="font-poppins-semibold text-lg py-2 border-b-2">Nama Paper</label>
+                            <input class="border-2 px-3 py-2 rounded-lg" type="text" name="" id="paper1">
+                        </div>
+                        <div class="flex flex-col w-full md:w-1/2">
+                            <label for="jenis1" class="font-poppins-semibold text-lg py-2 border-b-2">Jenis Paper</label>
+                            <input class="border-2 px-3 py-2 rounded-lg" type="text" name="" id="jenis1">
+                        </div>
+                    </div> --}}
+
+                </div>
+                <p onclick="tambahPaper()" class="hover:text-orange-500 mt-2">+ Tambah Paper</p>
+
+                <button onclick="prosesDataset()" type="button"
+                    class="w-full bg-green-400 hover:bg-green-500 py-2 text-white rounded-md mt-6">Simpan</button>
+
+            </div>
+
+        </div>
+    </form>
+@endsection
+
 @section('konten')
     <div class="flex flex-col min-h-full w-full py-8 px-4">
 
@@ -7,7 +93,7 @@
         <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center">
             <div class="flex flex-row gap-3">
                 <p class="">Buat Database Baru,</p>
-                <p class=" text-blue-600">disini</p>
+                <p onclick="handleModal()" class="cursor-pointer text-blue-600">disini</p>
             </div>
             <div class="flex flex-row border-2 px-4 border-gray-300 rounded-xl items-center w-full md:w-[30%] mt-6 md:mt-0">
                 <svg class="" xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21"
@@ -23,9 +109,9 @@
             </div>
         </div>
         @if (count($data) != 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 w-full h-fit gap-10 mt-6 flex-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 w-full h-fit gap-10 mt-6">
                 @foreach ($data as $item)
-                    <div class="flex flex-col  py-4 px-6 bg-gray-100 rounded-xl relative overflow-hidden h-fit">
+                    <div class="flex flex-col  py-4 px-6 bg-gray-100 rounded-xl relative overflow-hidden h-fit  ">
                         <svg class="absolute top-4 right-8" xmlns="http://www.w3.org/2000/svg" width="3" height="24"
                             viewBox="0 0 3 24" fill="none">
                             <g clip-path="url(#clip0_44_16)">
@@ -34,7 +120,8 @@
                             </g>
                             <defs>
                                 <clipPath id="clip0_44_16">
-                                    <rect width="2.44563" height="24" fill="white" transform="translate(0.250488)" />
+                                    <rect width="2.44563" height="24" fill="white"
+                                        transform="translate(0.250488)" />
                                 </clipPath>
                             </defs>
                         </svg>
@@ -42,8 +129,8 @@
                         <p class="line-clamp-2 text-sm text-gray-500">{{ $item->deskripsi_data }}</p>
                         <div class="flex flex-row justify-between mt-12">
                             <div class="flex flex-row gap-3 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 20 15"
-                                    fill="none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15"
+                                    viewBox="0 0 20 15" fill="none">
                                     <path
                                         d="M4.50049 12.5H15.2001V11.25H4.50049M15.2001 5.625H12.1431V1.875H7.55752V5.625H4.50049L9.8503 10L15.2001 5.625Z"
                                         fill="black" />
@@ -57,7 +144,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="mt-4 flex flex-col justify-center md:flex-row md:justify-between gap-2 py-2 items-center">
+            <div class="mt-4 flex flex-col justify-center md:flex-row md:justify-between gap-2 py-2 items-end flex-1">
                 {{ $data->onEachSide(2)->links('components.pagination') }}
             </div>
         @else
@@ -67,4 +154,8 @@
             </div>
         @endif
     </div>
+@endsection
+
+@section('otherjs')
+    <script src="/js/KelolahDataset.js"></script>
 @endsection
