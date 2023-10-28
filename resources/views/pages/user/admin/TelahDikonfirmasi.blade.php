@@ -77,7 +77,7 @@
         <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center">
             <div class="flex flex-col md:flex-row gap-3 cursor-default items-start md:items-center relative pb-4">
                 <a href="/admin/menunggu-konfirmasi"
-                    class="font-poppins-medium text-gray-500 text-md pl-6 md:pl-4 hover:bg-slate-100 pr-4 py-3 rounded-md">Menunggu
+                    class="font-poppins-medium text-gray-500 text-md hover:bg-slate-100 pr-4 py-3 rounded-md">Menunggu
                     Konfirmasi</a>
                 <h1 class="font-poppins-semibold text-md pl-6 md:pl-0">Telah Dikonfirmasi</h1>
                 <div class="absolute w-2 h-[50px] bottom-0 bg-slate-700 md:h-2 md:w-[155px] md:bottom-0 md:right-0">
@@ -98,7 +98,7 @@
             </div>
         </div>
         @if (count($data) != 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 w-full h-fit gap-10 mt-10 flex-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 w-full h-fit gap-4 mt-10">
                 @foreach ($data as $item)
                     <div class="flex flex-col  py-4 px-6 bg-gray-100 rounded-xl relative h-fit overflow-hidden">
                         <h1 class="font-poppins-semibold text-lg py-2">{{ $item->nama_data }}</h1>
@@ -110,7 +110,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="mt-4 flex flex-col justify-center md:flex-row md:justify-between gap-2 py-2 items-center">
+            <div class="mt-4 flex flex-col justify-center md:flex-row md:justify-between gap-2 py-2 items-end flex-1">
                 {{ $data->onEachSide(2)->links('components.pagination') }}
             </div>
         @else
