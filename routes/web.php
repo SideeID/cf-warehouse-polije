@@ -48,19 +48,21 @@ Route::get('/login', function () {
     return view('layouts.login');
 })->name('login');
 
-// Rute untuk logout
+
 Route::get('/logout', function () {
     Auth::logout();
-    return redirect('/login');
+    return redirect('/');
 })->name('logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 Route::get('/auth/redirect', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('/google/redirect', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
 
 Route::get('/data/{user}/{id}', [DatasetController::class, 'detail_dataset']);
 
-
-
+Route::get('/dataset', [HomeController::class, 'dataset'])->name('dataset.dataset');
+Route::get('/dataset/create', [HomeController::class, 'create'])->name('dataset.create');
+Route::post('/dataset/create', [HomeController::class, 'create'])->name('dataset.create')->middleware('auth');
 Route::get('/download/{name}/{id}', [DatasetController::class, 'download']);
