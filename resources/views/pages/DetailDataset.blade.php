@@ -10,7 +10,7 @@
             <div class="flex flex-col flex-1 h-full pr-8">
                 <h1 class="font-poppins-semibold text-3xl text-gray-700 border-b-2 pb-6">{{ $data->nama_data }}</h1>
                 <h1 class="font-poppins-semibold text-3xl text-gray-700 py-6">Deskripsi</h1>
-                <div class="whitespace-pre-line">{{ $data->deskripsi_data }}
+                <div class="whitespace-pre-line break-all">{{ $data->deskripsi_data }}
                 </div>
             </div>
             <div
@@ -38,14 +38,14 @@
                     <p>Tidak ada paper</p>
                 @endif
                 @foreach ($data->paper as $item)
-                    <div class="flex flex-row gap-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19"
+                    <div class="flex flex-row gap-3 ">
+                        <svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19"
                             fill="none">
                             <path
                                 d="M10.2915 7.12498V2.77081L14.6457 7.12498M4.74984 1.58331C3.87109 1.58331 3.1665 2.2879 3.1665 3.16665V15.8333C3.1665 16.2532 3.33332 16.656 3.63025 16.9529C3.92718 17.2498 4.32991 17.4166 4.74984 17.4166H14.2498C14.6698 17.4166 15.0725 17.2498 15.3694 16.9529C15.6664 16.656 15.8332 16.2532 15.8332 15.8333V6.33331L11.0832 1.58331H4.74984Z"
                                 fill="black" />
                         </svg>
-                        <p>{{ $item->nama_paper }}</p>
+                        <p class="flex-1">{{ $item->nama_paper }}</p>
                     </div>
                 @endforeach
             </div>

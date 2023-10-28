@@ -75,12 +75,12 @@ const detailDataset = (data) => {
     var kontenHtml = "";
     data.paper.forEach((element) => {
         kontenHtml += `<div class="flex flex-row gap-3 py-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                        <svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
                             <path
                                 d="M10.2915 7.12498V2.77081L14.6457 7.12498M4.74984 1.58331C3.87109 1.58331 3.1665 2.2879 3.1665 3.16665V15.8333C3.1665 16.2532 3.33332 16.656 3.63025 16.9529C3.92718 17.2498 4.32991 17.4166 4.74984 17.4166H14.2498C14.6698 17.4166 15.0725 17.2498 15.3694 16.9529C15.6664 16.656 15.8332 16.2532 15.8332 15.8333V6.33331L11.0832 1.58331H4.74984Z"
                                 fill="black" />
                         </svg>
-                        <p>${element.nama_paper}</p>
+                        <p class="flex-1">${element.nama_paper}</p>
                     </div>`;
     });
 
