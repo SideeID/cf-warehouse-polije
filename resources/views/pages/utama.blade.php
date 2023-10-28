@@ -5,13 +5,16 @@
 <div class="flex flex-1 w-full">
     <div class="text-center mt-2 flex flex-col min-h-full w-full py-8 px-4">
         <h1 class="text-xl font-bold">Welcome to the Jember State Polytechnic data warehouse</h1>
+        <p class="mt-5">Source of Inspiration and Referral: This repository is a great place for anyone looking for inspiration, resources and support on their learning journey.</p>
         <div class="mt-10">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border-blue-700 rounded-lg mb-2">
+            <a  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border-blue-700 rounded-lg mb-5 mx-5">
+                {{-- href="{{ route('dataset.index') }}" --}}
                 View Dataset
-            </button>
-            <button class="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 border-yellow-700 rounded-lg mb-2">
+            </a>
+            <a  class="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 border-yellow-700 rounded-lg mb-5 mx-5">
+                {{-- href="{{ route('dataset.create') }}" --}}
                 Contribute a dataset
-            </button>
+            </a>
         </div>
 
         <div class="text-center flex justify-between">
@@ -24,7 +27,9 @@
                 <tbody>
                     @foreach ($newer as $newDataset)
                     <tr>
-                        <td class="border-2 px-4 py-2 rounded-lg">{{ $newDataset->title }}</td>
+                        <td class="font-poppins-semibold border-2 px-4 py-2 rounded-lg text-left text-lg">{{ $newDataset->nama_data }}
+                            <p class="line-clamp-2 text-xs text-gray-500 mt-2">{{ $newDataset->deskripsi_data }}</p>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -39,7 +44,9 @@
                 <tbody>
                     @foreach ($popular as $popularDataset)
                     <tr>
-                        <td class="border-2 px-4 py-2 rounded-lg">{{ $popularDataset->title }}</td>
+                        <td class="font-poppins-semibold border-2 px-4 py-2 rounded-lg text-left text-lg">{{ $newDataset->nama_data }}
+                            <p class="line-clamp-2 text-xs text-gray-500 mt-2">{{ $newDataset->deskripsi_data }}</p>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
