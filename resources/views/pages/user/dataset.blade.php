@@ -112,22 +112,12 @@
             <div class="grid grid-cols-1 md:grid-cols-2 w-full h-fit gap-10 mt-6">
                 @foreach ($data as $item)
                     <div class="flex flex-col  py-4 px-6 bg-gray-100 rounded-xl relative overflow-hidden h-fit  ">
-                        <svg class="absolute top-4 right-8" xmlns="http://www.w3.org/2000/svg" width="3" height="24"
-                            viewBox="0 0 3 24" fill="none">
-                            <g clip-path="url(#clip0_44_16)">
-                                <path d="M0.556152 6.00101H2.39037M0.556152 12.001H2.39037M0.556152 18.001H2.39037"
-                                    stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_44_16">
-                                    <rect width="2.44563" height="24" fill="white"
-                                        transform="translate(0.250488)" />
-                                </clipPath>
-                            </defs>
-                        </svg>
+                        
                         <h1 class="font-poppins-semibold text-lg py-2">{{ $item->nama_data }}</h1>
                         <p class="line-clamp-2 text-sm text-gray-500">{{ $item->deskripsi_data }}</p>
-                        <div class="flex flex-row justify-between mt-12">
+                        <p class="font-poppins-medium text-xs mt-4 {{ $item->valid == 0 ? 'text-red-500' : 'text-green-500' }}">
+                            {{ $item->valid == 0 ? 'Menunggu Konfirmasi' : 'Telah Dikonfirmasi' }}</p>
+                        <div class="flex flex-row justify-between mt-6">
                             <div class="flex flex-row gap-3 items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15"
                                     viewBox="0 0 20 15" fill="none">
@@ -137,14 +127,24 @@
                                 </svg>
                                 <p>{{ $item->download_count }}</p>
                             </div>
-                            <p
-                                class="font-poppins-medium text-xs {{ $item->valid == 0 ? 'text-red-500' : 'text-green-500' }}">
-                                {{ $item->valid == 0 ? 'Menunggu Konfirmasi' : 'Telah Dikonfirmasi' }}</p>
+                            <div class="flex flex-row gap-2">
+                                <div class="hover:bg-gray-200 p-2 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M3 17.25V21H6.75L17.81 9.94L14.06 6.19L3 17.25ZM20.71 7.04C20.8027 6.94749 20.8763 6.8376 20.9264 6.71663C20.9766 6.59565 21.0024 6.46597 21.0024 6.335C21.0024 6.20403 20.9766 6.07435 20.9264 5.95338C20.8763 5.83241 20.8027 5.72252 20.71 5.63L18.37 3.29C18.2775 3.1973 18.1676 3.12375 18.0466 3.07357C17.9257 3.02339 17.796 2.99756 17.665 2.99756C17.534 2.99756 17.4043 3.02339 17.2834 3.07357C17.1624 3.12375 17.0525 3.1973 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04Z" fill="black"/>
+                                      </svg>
+                                </div>
+                                <div class="hover:bg-gray-200 p-2 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z" fill="black"/>
+                                      </svg>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 @endforeach
             </div>
-            <div class="mt-4 flex flex-col justify-center md:flex-row md:justify-between gap-2 py-2 items-end flex-1">
+            <div class="mt-4 flex flex-col justify-end md:flex-row md:justify-between gap-2 py-2 items-center md:items-end flex-1">
                 {{ $data->onEachSide(2)->links('components.pagination') }}
             </div>
         @else

@@ -6,7 +6,7 @@
             <img class="h-12 rounded-full" src='/assets/images/profile.png' alt="profile">
         @endif
         <a href="{{ !Auth::check() ? '/login' : '#' }}"
-            class="{{ Auth::check() ? 'hidden' : 'flex bg-blue-600 text-white' }} md:flex  px-1 py-1 rounded-md">
+            class="{{ Auth::check() ? 'hidden' : 'flex bg-blue-600 text-white px-3' }} md:flex  px-1 py-1 rounded-md">
             @if (Auth::check())
                 {{ strtoupper(explode('@', Auth::user()->email)[0]) }}
             @else

@@ -110,7 +110,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="mt-4 flex flex-col justify-center md:flex-row md:justify-between gap-2 py-2 items-end flex-1">
+            <div class="mt-4 flex flex-col justify-end md:flex-row md:justify-between gap-2 py-2 items-center md:items-end flex-1">
                 {{ $data->onEachSide(2)->links('components.pagination') }}
             </div>
         @else
