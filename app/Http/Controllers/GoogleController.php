@@ -32,7 +32,7 @@ class GoogleController extends Controller
                     'id_level' => 2,
                 ]);
                 Auth::login($newUser);
-                return redirect()->intended('/');
+                return redirect()->intended('/home');
             }
         } catch (Exception $e) {
             dd($e->getMessage());   
