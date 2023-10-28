@@ -16,7 +16,7 @@
             <div
                 class="flex flex-col w-full mt-6 md:mt-0 border-t-2 md:border-t-0 md:w-[30%] h-full gap-2 px-0 md:px-4 py-4">
 
-                <a href="/uploads/data/{{ $data->file_data }}"
+                <a href="/download/{{ $data->file_data }}/{{ $data->id_data }}"
                     class="bg-slate-700 hover:bg-slate-900 text-white py-4 rounded-md flex flex-row gap-3 items-center justify-center"><svg
                         width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path

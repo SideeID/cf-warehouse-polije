@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DatasetController;
+use App\Http\Middleware\ProtectAdmin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,31 @@ use Illuminate\Support\Facades\Route;
 
 
 // Rute untuk menampilkan halaman login
+Route::middleware(['auth'])->group(function () {
+    Route::middleware([ProtectAdmin::class])->group(function () {
+        Route::prefix('admin')->group(function () {
+            Route::prefix('menunggu-konfirmasi')->group(function () {
+                Route::get('/', [DatasetController::class, 'menunggu_konfirmasi']);
+                Route::get('/delete/{kode}', [DatasetController::class, 'tolak_dataset']);
+                Route::get('/accept/{kode}', [DatasetController::class, 'terima_dataset']);
+            });
+
+            Route::prefix('telah-konfirmasi')->group(function () {
+                Route::get('/', [DatasetController::class, 'telah_konfirmasi']);
+            });
+        });
+    });
+
+    Route::prefix('user')->group(function () {
+        Route::prefix('dataset')->group(function () {
+            Route::get('', [DatasetController::class, 'kelolah_dataset']);
+            Route::post('/add', [DatasetController::class, 'add_dataset']);
+            Route::post('/update/{id}', [DatasetController::class, 'update_dataset']);
+            Route::get('/delete/{id}', [DatasetController::class, 'delete_dataset']);
+        });
+    });
+});
+
 Route::get('/login', function () {
     return view('layouts.login');
 })->name('login');
@@ -35,18 +61,6 @@ Route::get('/google/redirect', [App\Http\Controllers\GoogleController::class, 'h
 
 Route::get('/data/{user}/{id}', [DatasetController::class, 'detail_dataset']);
 
-Route::get('/user/dataset', [DatasetController::class, 'kelolah_dataset']);
 
-Route::prefix('admin')->group(function () {
-    Route::prefix('menunggu-konfirmasi')->group(function () {
-        Route::get('/', [DatasetController::class, 'menunggu_konfirmasi']);
-        Route::get('/delete/{kode}', [DatasetController::class, 'tolak_dataset']);
-        Route::get('/accept/{kode}', [DatasetController::class, 'terima_dataset']);
-    });
 
-    Route::prefix('telah-konfirmasi')->group(function () {
-        Route::get('/', [DatasetController::class, 'telah_konfirmasi']);
-    });
-    
-});
-
+Route::get('/download/{name}/{id}', [DatasetController::class, 'download']);
