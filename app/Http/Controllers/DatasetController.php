@@ -228,6 +228,31 @@ class DatasetController extends Controller
         return redirect('/user/dataset');
     }
 
+    public function delete_dataset($kode, Request $request)
+    {
+        if ($request->has('token')) {
+            if ($request->token === $request->session()->token()) {
+                $request->session()->regenerateToken();
+
+                $data = Dataset::find($kode);
+
+                if (File::exists("uploads/data/" . $data->file_data)) {
+                    File::delete("uploads/data/" . $data->file_data);
+                }
+
+                $data->delete();
+
+                Alert::success('Berhasil', 'Berhasil menghapus data');
+
+                return redirect('/user/dataset');
+            } else {
+                return redirect('/user/dataset');
+            }
+        } else {
+            return redirect('/user/dataset');
+        }
+    }
+
     public function download($name, $id){
         if (File::exists("uploads/data/" . $name)) {
             $data = Dataset::find($id);

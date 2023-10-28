@@ -243,3 +243,20 @@ const handleEdit = (data) => {
     konten_paper.innerHTML = kontenHtml
     handleModal();
 };
+
+const handleDelete = (url) => {
+    Swal.fire({
+        title: "Konfirmasi",
+        text: "Apakah anda yakin ingin menghapus data?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonText: "Tidak",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            location.href = window.location.origin + url;
+        }
+    });
+}
