@@ -10,9 +10,15 @@
             <a href="{{ route('dataset.dataset') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border-blue-700 rounded-lg mb-5 mx-5">      
                 View Dataset
             </a>
-            <a href="{{ route('dataset.create') }}" class="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 border-yellow-700 rounded-lg mb-5 mx-5"> 
-                Contribute a dataset
-            </a>
+            @guest
+                <a href="{{ route('login') }}" class="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 border-yellow-700 rounded-lg mb-5 mx-5">
+                    Contribute a dataset
+                </a>
+            @else
+                <a href="{{ route('dataset.create') }}" class="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 border-yellow-700 rounded-lg mb-5 mx-5">
+                    Contribute a dataset
+                </a>
+            @endguest
         </div>
 
         <div class="text-center flex justify-between">
