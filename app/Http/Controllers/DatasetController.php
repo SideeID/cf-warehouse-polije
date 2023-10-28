@@ -7,6 +7,7 @@ use App\Models\JenisPaper;
 use App\Models\Paper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -35,9 +36,9 @@ class DatasetController extends Controller
     public function kelolah_dataset(Request $request)
     {
         // Ubah id_user 1 ke session sesuai yang login
-        $data = Dataset::where('id_user', 1)->orderBy('created_at', 'desc')->paginate(10);
+        $data = Dataset::where('id_user', Auth::user()->id_user)->orderBy('created_at', 'desc')->paginate(10);
         if ($request->has('search')) {
-            $data = Dataset::where('id_user', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+            $data = Dataset::where('id_user', Auth::user()->id_user)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
         }
 
         if ($request->has('search')) {
@@ -54,9 +55,9 @@ class DatasetController extends Controller
 
     public function menunggu_konfirmasi(Request $request)
     {
-        $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 0)->orderBy('created_at', 'desc')->paginate(10);
+        $data = Dataset::with('paper')->where('valid', 0)->orderBy('created_at', 'desc')->paginate(10);
         if ($request->has('search')) {
-            $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 0)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+            $data = Dataset::with('paper')->where('valid', 0)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
         }
 
         if ($request->has('search')) {
@@ -116,9 +117,9 @@ class DatasetController extends Controller
 
     public function telah_konfirmasi(Request $request)
     {
-        $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 1)->orderBy('created_at', 'desc')->paginate(10);
+        $data = Dataset::with('paper')->where('valid', 1)->orderBy('created_at', 'desc')->paginate(10);
         if ($request->has('search')) {
-            $data = Dataset::with('paper')->where('id_user', 1)->where('valid', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+            $data = Dataset::with('paper')->where('valid', 1)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
         }
 
         if ($request->has('search')) {
@@ -158,7 +159,7 @@ class DatasetController extends Controller
         }
 
         $dataset->download_count = 0;
-        $dataset->id_user = 1;
+        $dataset->id_user = Auth::user()->id_user;
         $dataset->valid = 0;
         $dataset->save();
 
@@ -183,7 +184,7 @@ class DatasetController extends Controller
             $data = Dataset::find($id);
             $data->download_count = $data->download_count + 1;
             $data->save();
-            
+
             return response()->download(public_path('uploads/data/' . $name));
         }
 
