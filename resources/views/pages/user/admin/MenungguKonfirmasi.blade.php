@@ -22,7 +22,7 @@
                 </svg>
             </div>
         </div>
-        <div class="flex w-full h-full flex-col py-6 px-4 overflow-y-auto ">
+        <div class="flex w-full h-full flex-col py-6 px-6 overflow-y-auto ">
             <h1 class="font-poppins-semibold text-2xl py-1">Deskripsi</h1>
             <div id="d_deskripsi" class="whitespace-pre-line h-fit">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, in
                 ex! Nam nobis doloribus nisi.
@@ -74,7 +74,7 @@
         <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center">
             <div class="flex flex-col md:flex-row gap-3 cursor-default items-start md:items-center relative pb-4">
                 <h1 class="font-poppins-semibold text-md pl-6 md:pl-0">Menunggu Konfirmasi</h1>
-                <a href="/admin/telah-konfirmasi" class="font-poppins-medium text-gray-500 text-md pl-6 md:pl-4 hover:bg-slate-100 pr-4 py-3 rounded-md">
+                <a href="/admin/telah-konfirmasi" class="font-poppins-medium text-gray-500 text-md pl-0 md:pl-4 hover:bg-slate-100 pr-4 py-3 rounded-md">
                     Telah Dikonfirmasi.</a>
                 <div class="absolute w-2 h-[30px] bg-slate-700 md:h-2 md:w-[185px] md:bottom-0">
 

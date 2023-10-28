@@ -22,7 +22,7 @@
                 </svg>
             </div>
         </div>
-        <div class="flex w-full h-full flex-col py-6 px-4 overflow-y-auto ">
+        <div class="flex w-full h-full flex-col py-6 px-6 overflow-y-auto ">
             <h1 class="font-poppins-semibold text-2xl py-1">Deskripsi</h1>
             <div id="d_deskripsi" class="whitespace-pre-line h-fit">Lorem ipsum dolor sit amet, consectetur adipisicing
                 elit. Repudiandae, in

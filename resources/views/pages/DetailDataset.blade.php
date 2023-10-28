@@ -82,7 +82,7 @@
 
                             </div>
                             <div class="flex flex-row justify-between gap-2 border-t-2 mt-4 px-8 pt-4">
-                                <p>{{ $item->user->email }}</p>
+                                <p>{{ strtoupper(explode('@', $item->user->email)[0]) }}</p>
                                 <div class="flex flex-row gap-2">
                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +132,7 @@
 
                             </div>
                             <div class="flex flex-row justify-between gap-2 border-t-2 mt-4 px-8 pt-4">
-                                <p>{{ $item->user->email }}</p>
+                                <p>{{ strtoupper(explode('@', $item->user->email)[0]) }}</p>
                                 <div class="flex flex-row gap-2">
                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
