@@ -7,12 +7,10 @@
         <h1 class="text-xl font-bold">Welcome to the Jember State Polytechnic data warehouse</h1>
         <p class="mt-5">Source of Inspiration and Referral: This repository is a great place for anyone looking for inspiration, resources and support on their learning journey.</p>
         <div class="mt-10">
-            <a  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border-blue-700 rounded-lg mb-5 mx-5">
-                {{-- href="{{ route('dataset.index') }}" --}}
+            <a href="{{ route('dataset.dataset') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border-blue-700 rounded-lg mb-5 mx-5">      
                 View Dataset
             </a>
-            <a  class="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 border-yellow-700 rounded-lg mb-5 mx-5">
-                {{-- href="{{ route('dataset.create') }}" --}}
+            <a href="{{ route('dataset.create') }}" class="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-2 px-4 border-yellow-700 rounded-lg mb-5 mx-5"> 
                 Contribute a dataset
             </a>
         </div>
