@@ -36,9 +36,9 @@ class DatasetController extends Controller
     public function kelolah_dataset(Request $request)
     {
         // Ubah id_user 1 ke session sesuai yang login
-        $data = Dataset::where('id_user', Auth::user()->id_user)->orderBy('created_at', 'desc')->paginate(10);
+        $data = Dataset::with('paper')->where('id_user', Auth::user()->id_user)->orderBy('created_at', 'desc')->paginate(10);
         if ($request->has('search')) {
-            $data = Dataset::where('id_user', Auth::user()->id_user)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
+            $data = Dataset::with('paper')->where('id_user', Auth::user()->id_user)->where('nama_data', 'LIKE', '%' . $request->query('search') . '%')->orderBy('created_at', 'desc')->paginate(10);
         }
 
         if ($request->has('search')) {
@@ -177,6 +177,80 @@ class DatasetController extends Controller
 
         Alert::success('Berhasil', 'Berhasil menambahkan data');
         return redirect('/user/dataset');
+    }
+
+    public function update_dataset($id, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'judul' =>  'required',
+            'deskripsi' => 'required',
+        ], [
+            'required' => 'Field wajib diisi!'
+        ]);
+
+        if ($validator->fails()) {
+            Alert::error('Gagal', 'Gagal mengubah data');
+            return redirect()->back()->withErrors($validator);
+        }
+
+        if($id){
+            $dataset = Dataset::find($id);
+            $dataset->nama_data = $request->judul;
+            $dataset->deskripsi_data = $request->deskripsi;
+    
+            $file = $request->file('file');
+            if ($file) {
+                if (File::exists("uploads/data/" . $dataset->file_data)) {
+                    File::delete("uploads/data/" . $dataset->file_data);
+                }
+
+                $nama_file = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/data/'), $nama_file);
+                $dataset->file_data = $nama_file;
+            }
+    
+            $dataset->save();
+
+            Paper::where('id_data', $dataset->id_data)->delete();
+    
+            if($request->has('nama_paper') && $request->has('jenis_paper')){
+                for ($i=0; $i < count($request->nama_paper); $i++) { 
+                    Paper::create([
+                        "nama_paper" => $request->nama_paper[$i],
+                        "id_jenis_paper" => $request->jenis_paper[$i],
+                        "id_data" => $dataset->id_data
+                    ]);
+                }
+            }
+        }
+
+        Alert::success('Berhasil', 'Berhasil mengubah data');
+        return redirect('/user/dataset');
+    }
+
+    public function delete_dataset($kode, Request $request)
+    {
+        if ($request->has('token')) {
+            if ($request->token === $request->session()->token()) {
+                $request->session()->regenerateToken();
+
+                $data = Dataset::find($kode);
+
+                if (File::exists("uploads/data/" . $data->file_data)) {
+                    File::delete("uploads/data/" . $data->file_data);
+                }
+
+                $data->delete();
+
+                Alert::success('Berhasil', 'Berhasil menghapus data');
+
+                return redirect('/user/dataset');
+            } else {
+                return redirect('/user/dataset');
+            }
+        } else {
+            return redirect('/user/dataset');
+        }
     }
 
     public function download($name, $id){

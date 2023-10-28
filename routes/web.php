@@ -35,8 +35,12 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('user')->group(function () {
-        Route::get('/dataset', [DatasetController::class, 'kelolah_dataset']);
-        Route::post('/dataset/add', [DatasetController::class, 'add_dataset']);
+        Route::prefix('dataset')->group(function () {
+            Route::get('', [DatasetController::class, 'kelolah_dataset']);
+            Route::post('/add', [DatasetController::class, 'add_dataset']);
+            Route::post('/update/{id}', [DatasetController::class, 'update_dataset']);
+            Route::get('/delete/{id}', [DatasetController::class, 'delete_dataset']);
+        });
     });
 });
 
