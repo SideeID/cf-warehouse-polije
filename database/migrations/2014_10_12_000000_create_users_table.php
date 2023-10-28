@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tm_user', function (Blueprint $table) {
             $table->id('id_user');
             $table->string('email')->unique();
-            $table->foreignId('id_level')->constrained()->references('id_level')->on('tm_level')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('id_level')->constrained()->references('id_level')->on('tm_level')->onUpdate('cascade')->onDelete('cascade')->default(2);
             $table->timestamps();
         });
     }
