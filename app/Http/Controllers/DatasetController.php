@@ -189,7 +189,7 @@ class DatasetController extends Controller
         ]);
 
         if ($validator->fails()) {
-            Alert::error('Gagal', 'Gagal menambahkan data');
+            Alert::error('Gagal', 'Gagal mengubah data');
             return redirect()->back()->withErrors($validator);
         }
 
