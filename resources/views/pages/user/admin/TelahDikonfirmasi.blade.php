@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('header')
+    Telah Dikonfirmasi
+@endsection
+
 @section('modal')
     {{-- bg hitam --}}
     <div onclick="handleModal()" id="bg"
@@ -22,7 +26,7 @@
                 </svg>
             </div>
         </div>
-        <div class="flex w-full h-full flex-col py-6 px-4 overflow-y-auto ">
+        <div class="flex w-full h-full flex-col py-6 px-6 overflow-y-auto ">
             <h1 class="font-poppins-semibold text-2xl py-1">Deskripsi</h1>
             <div id="d_deskripsi" class="whitespace-pre-line h-fit">Lorem ipsum dolor sit amet, consectetur adipisicing
                 elit. Repudiandae, in

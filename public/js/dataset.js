@@ -90,3 +90,13 @@ const detailDataset = (data) => {
     d_paper.innerHTML = kontenHtml;
     handleModal();
 };
+
+const sortDataset = (e) => {
+    if (e.value == "newer") {
+        location.href = window.location.origin + "/dataset/newer";
+    } else if (e.value == "popular") {
+        location.href = window.location.origin + "/dataset/popular";
+    } else {
+        location.href = window.location.origin + '/dataset';
+    }
+};

@@ -4,6 +4,10 @@
     loadJenisPaper({{ $jenis_paper }})
 @endsection
 
+@section('header')
+    Kelolah Dataset
+@endsection
+
 @section('modal')
     {{-- bg hitam --}}
     <div onclick="handleModal()" id="bg"
@@ -137,7 +141,8 @@
                                             fill="black" />
                                     </svg>
                                 </div>
-                                <div onclick="handleDelete('/user/dataset/delete/{{ $item->id_data }}?token={{ csrf_token() }}')" class="hover:bg-gray-200 p-2 rounded-md">
+                                <div onclick="handleDelete('/user/dataset/delete/{{ $item->id_data }}?token={{ csrf_token() }}')"
+                                    class="hover:bg-gray-200 p-2 rounded-md">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none">
                                         <path
@@ -166,4 +171,9 @@
 
 @section('otherjs')
     <script src="/js/KelolahDataset.js"></script>
+    @if (Request::has('create'))
+        <script>
+            handleModal()
+        </script>
+    @endif
 @endsection

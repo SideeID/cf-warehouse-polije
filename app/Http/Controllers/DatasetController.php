@@ -258,6 +258,7 @@ class DatasetController extends Controller
             $data = Dataset::find($id);
             $data->download_count = $data->download_count + 1;
             $data->save();
+            
 
             return response()->download(public_path('uploads/data/' . $name));
         }

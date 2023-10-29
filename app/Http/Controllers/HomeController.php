@@ -24,31 +24,53 @@ class HomeController extends Controller
             ->orderBy('download_count', 'desc')
             ->limit(6)
             ->get();
-            
+
         return view('pages.utama', compact('newer', 'popular'));
     }
 
     public function dataset(Request $request)
-{
-    $search = $request->input('search');
-    $sort = $request->input('sort', 'desc');
+    {
+        $search = $request->input('search');
+        $sort = $request->input('sort', 'desc');
 
-    $query = Dataset::where('valid', 1);
+        $query = Dataset::where('valid', 1);
 
-    if ($search) {
-        $query->where('nama_data', 'like', '%' . $search . '%');
+        if ($search) {
+            $query->where('nama_data', 'like', '%' . $search . '%');
+        }
+
+        if ($sort === 'asc') {
+            $query->orderBy('created_at', 'asc');
+        } elseif ($sort === 'desc') {
+            $query->orderBy('created_at', 'desc');
+        }
+
+
+        $datasets = $query->paginate(10);
+        if ($request->has('search')) {
+            $datasets->appends(array(
+                'search' => $request->search
+            ));
+        }
+
+        return view('pages.dataset.index', compact('datasets'));
     }
 
-    if ($sort === 'asc') {
-        $query->orderBy('created_at', 'asc');
-    } elseif ($sort === 'desc') {
-        $query->orderBy('created_at', 'desc');
+    public function dataset_newer(Request $request)
+    {
+        $query = Dataset::where('valid', 1)->orderBy('created_at', 'desc');
+        $datasets = $query->paginate(10);
+
+        return view('pages.dataset.index', compact('datasets'));
     }
 
-    $datasets = $query->get();
+    public function dataset_popular(Request $request)
+    {
+        $query = Dataset::where('valid', 1)->orderBy('download_count', 'desc');
+        $datasets = $query->paginate(10);
 
-    return view('pages.dataset.index', compact('datasets'));
-}
+        return view('pages.dataset.index', compact('datasets'));
+    }
 
 
 
@@ -62,7 +84,7 @@ class HomeController extends Controller
             ], [
                 'required' => 'Field wajib diisi!',
             ]);
-    
+
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator);
             }
@@ -98,5 +120,4 @@ class HomeController extends Controller
         }
         return view('pages.dataset.create');
     }
-
 }

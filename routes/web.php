@@ -62,7 +62,11 @@ Route::get('/google/redirect', [App\Http\Controllers\GoogleController::class, 'h
 
 Route::get('/data/{user}/{id}', [DatasetController::class, 'detail_dataset']);
 
-Route::get('/dataset', [HomeController::class, 'dataset'])->name('dataset.dataset');
-Route::get('/dataset/create', [HomeController::class, 'create'])->name('dataset.create');
-Route::post('/dataset/create', [HomeController::class, 'create'])->name('dataset.create')->middleware('auth');
+Route::prefix('dataset')->group(function () {
+    Route::get('/', [HomeController::class, 'dataset'])->name('dataset.dataset');
+    Route::get('/newer', [HomeController::class, 'dataset_newer'])->name('dataset.dataset.newer');
+    Route::get('/popular', [HomeController::class, 'dataset_popular'])->name('dataset.dataset.popular');
+});
+// Route::get('/dataset/create', [HomeController::class, 'create'])->name('dataset.create');
+// Route::post('/dataset/create', [HomeController::class, 'create'])->name('dataset.create')->middleware('auth');
 Route::get('/download/{name}/{id}', [DatasetController::class, 'download']);

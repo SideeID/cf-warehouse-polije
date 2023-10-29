@@ -1,4 +1,4 @@
-<div class="py-5 px-4 flex h-fit w-full flex-row justify-between border-b-[2px]">
+<div class="py-5 px-4 flex h-fit w-full flex-row justify-between border-b-[2px] sticky top-0 bg-white z-[50]">
     <a href="/"><img class="h-fit w-fit" src="/assets/images/logo1.png" alt="logo"></a>
     <button onclick="{{ Auth::check() ? 'handleProfile()' : '' }}"
         class="h-12 rounded-full flex items-center space-x-2 hover:text-blue-600 focus:outline-none">
