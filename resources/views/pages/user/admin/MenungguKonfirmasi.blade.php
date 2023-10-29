@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('header')
+    Menunggu Konfirmasi
+@endsection
+
 @section('modal')
     {{-- bg hitam --}}
     <div onclick="handleModal()" id="bg"

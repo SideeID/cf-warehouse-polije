@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('header')
+    {{ $data->nama_data }}
+@endsection
+
 @section('konten')
     <div class="flex flex-col min-h-full w-full py-8 px-6">
         <div class="flex flex-row gap-3 items-center">
